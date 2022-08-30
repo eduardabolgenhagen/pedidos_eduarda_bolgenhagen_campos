@@ -1,26 +1,28 @@
-// const express = require('express');
-// const router = express.Router();
-// const productsHandler = require('./products.handler');
+const express = require('express');
+const router = express.Router();
+const productsHandler = require('./products.handler');
 
-// //save 
-// router.post('/', (req, res) => {
-//     const product = req.body;
-//     res.json(await productsHandler.saveProduct(product));
-// });
+//save 
+router.post('/', async (req, res) => {
+    const product = req.body;
+    res.json(await productsHandler.saveProduct(product));
+});
 
-// //get
-// router.get('/', (req, res) => {
-//     res.json(await productsHandler.getproducts());
-// });
+//get
+router.get('/', async (req, res) => {
+    res.json(await productsHandler.getProducts());
+});
 
-// //get by id
-// router.get('/:id', (req, res) => {
-//     const idProduct = req.params.id;
-//     res.json(await productsHandler.getByIdProduct(idProduct));
-// });
+//get by id
+router.get('/:id', async (req, res) => {
+    const idProduct = req.params.id;
+    res.json(await productsHandler.getByIdProduct(idProduct));
+});
 
-// //delete
-// router.delete(':id', (req, res) => {
-//     const idProduct = req.params.id;
-//     res.json(await productsHandler.removeProduct(idProduct));
-// });
+//delete
+router.delete(':id', async (req, res) => {
+    const idProduct = req.params.id;
+    res.json(await productsHandler.removeProduct(idProduct));
+});
+
+module.exports = router;

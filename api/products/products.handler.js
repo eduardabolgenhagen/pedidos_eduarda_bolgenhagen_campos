@@ -1,25 +1,24 @@
-// const { async } = require('@firebase/util');
-// const crud = require('../../crud/index');
+const crud = require('../../crud/index');
 
-// async function saveProduct(product) {
-//     return await crud.save('products', undefined, product);
-// };
+async function saveProduct(product) {
+    return await crud.save('products', undefined, product);
+};
 
-// async function getProducts() {
-//     return await crud.get('products');
-// };
+async function getProducts() {
+    return await crud.get('products');
+};
 
-// async function getByIdProduct(idProduct) {
-//     return await crud.getById('products', idProduct);
-// };
+async function getByIdProduct(idProduct) {
+    return await crud.getById('products', idProduct);
+};
 
-// async function removeProduct(idProduct) {
-//     return await crud.remove('products', idProduct);
-// };
+async function removeProduct(idProduct) {
+    return await crud.remove('products', idProduct);
+};
 
-// module.exports = {
-//     saveProduct,
-//     getProducts,
-//     getByIdProduct,
-//     removeProduct
-// };
+module.exports = {
+    saveProduct,
+    getProducts,
+    getByIdProduct,
+    removeProduct
+};
