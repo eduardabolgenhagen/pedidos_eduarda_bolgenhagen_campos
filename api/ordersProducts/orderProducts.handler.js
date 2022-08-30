@@ -1,6 +1,14 @@
 const crud = require('../../crud/index');
+const orderHandlers = require('../orders/orders.controller');
 
 async function saveOrderProduct(orderProducts) {
+    const idOrder = orderProducts.orderId;
+    const idProduct = orderProducts.productId;
+    const listOrders = [];
+    const listProducts = [];
+
+
+
     return await crud.save('orderProducts', orderProducts);
 };
 
