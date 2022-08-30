@@ -1,15 +1,27 @@
 const crud = require('../../crud/index');
-const orderHandlers = require('../orders/orders.controller');
+const orderHandler = require('../orders/orders.handler');
+const productsHandler = require('../products/products.handler');
 
 async function saveOrderProduct(orderProducts) {
     const idOrder = orderProducts.orderId;
     const idProduct = orderProducts.productId;
-    const listOrders = [];
-    const listProducts = [];
+    const listOrders = await orderHandler.getOrders();
+    const listProducts = await productsHandler.getProducts();
 
-
-
-    return await crud.save('orderProducts', orderProducts);
+    for (let order of listOrders) {
+        if (order.id === idOrder) {
+            for (let product of listProducts) {
+                if (product.id === idProduct) {
+                    return await crud.save('orderProducts', undefined, orderProducts);
+                }
+            }
+        }
+    }
+    return {
+        error: "0001",
+        message: "ID NÃO EXISTENTE",
+        necessity: ["idOrder, idProduct"]
+    }
 };
 
 async function getOrderProducts() {

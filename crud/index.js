@@ -41,7 +41,7 @@ async function save(table, id, data) {
         }
         return saveData;
     }
-}
+};
 
 async function get(table) {
     const refTable = collection(db, table);
@@ -57,7 +57,7 @@ async function get(table) {
         list.push(data);
     })
     return list;
-}
+};
 
 async function getById(table, id) {
     const docRef = doc(db, table, id);
@@ -68,7 +68,7 @@ async function getById(table, id) {
     } else {
         return new Erros("Not found!");
     }
-}
+};
 
 async function remove(table, id) {
     const data = await deleteDoc(doc(db, table, id));
@@ -76,11 +76,11 @@ async function remove(table, id) {
     return {
         message: `${id} removido!`
     }
-}
+};
 
 module.exports = {
     save,
     get,
     getById,
     remove
-}
+};

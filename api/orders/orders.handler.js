@@ -6,15 +6,15 @@ async function saveOrder(order) {
     const usersList = await usersHandler.getUsers();
 
     for (let user of usersList) {
-        if (user.id != idUser) {
-            return {
-                error: "0001",
-                message: "USUÁRIO NÃO EXISTENTE.",
-                necessity: ["userId"]
-            }
+        if (user.id === idUser) {
+            return await crud.save('orders', undefined, order);
         }
     }
-    return await crud.save('orders', undefined, order);;
+    return {
+        error: "0001",
+        message: "ID NÃO EXISTENTE",
+        necessity: ["userId"]
+    }
 };
 
 async function getOrders() {
