@@ -1,8 +1,20 @@
-const { async } = require('@firebase/util');
 const crud = require('../../crud/index');
+const usersHandler = require('../users/users.handler');
 
 async function saveOrder(order) {
-    return await crud.save('orders', undefined, order);
+    const idUser = order.userId;
+    const usersList = await usersHandler.getUsers();
+
+    for (let user of usersList) {
+        if (user.id != idUser) {
+            return {
+                error: "0001",
+                message: "USUÁRIO NÃO EXISTENTE.",
+                necessity: ["userId"]
+            }
+        }
+    }
+    return await crud.save('orders', undefined, order);;
 };
 
 async function getOrders() {
