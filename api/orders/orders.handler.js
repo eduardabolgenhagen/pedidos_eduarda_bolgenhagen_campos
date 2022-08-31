@@ -4,10 +4,23 @@ const usersHandler = require('../users/users.handler');
 async function saveOrder(order) {
     const idUser = order.userId;
     const usersList = await usersHandler.getUsers();
+    const orderList = await getOrders();
 
     for (let user of usersList) {
         if (user.id === idUser) {
-            return await crud.save('orders', undefined, order);
+            for (let order of orderList) {
+                if (order.userId === idUser) {
+                    if (order.status == 'open') {
+                        return {
+                            error: "0002",
+                            message: "FUNCIONALIDADE INDISPONÍVEL",
+                            necessity: ["userId"]
+                        }
+                    } else {
+                        return await crud.save('orders', undefined, order);
+                    }
+                }
+            }
         }
     }
     return {
