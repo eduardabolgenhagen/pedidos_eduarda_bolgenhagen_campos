@@ -12,7 +12,15 @@ async function saveOrderProduct(orderProducts) {
         if (order.id === idOrder) {
             for (let product of listProducts) {
                 if (product.id === idProduct) {
-                    return await crud.save('orderProducts', undefined, orderProducts);
+                    if (order.status == 'open') {
+                        return await crud.save('orderProducts', undefined, orderProducts);
+                    } else {
+                        return {
+                            error: "0002",
+                            message: "FUNCIONALIDADE INDISPONÍVEL",
+                            necessity: ["orderId"]
+                        }
+                    }
                 }
             }
         }
@@ -33,7 +41,18 @@ async function getByIdOrderProduct(idOrderProduct) {
 };
 
 async function removeOrderByProduct(idOrderProduct) {
-    return await crud.remove('orderProducts', idOrderProduct);
+    const listOrders = await orderHandler.getOrders();
+
+    for (let order of listOrders) {
+        if (order.productId === idOrderProduct) {
+            if (order.status == 'open') {
+                console.log('pode remover');
+                return await crud.remove('orderProducts', idOrderProduct);
+            } else {
+                console.log('não pode remover, pedido já fechado')
+            }
+        }
+    }
 };
 
 module.exports = {
