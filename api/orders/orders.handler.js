@@ -1,5 +1,6 @@
 const crud = require('../../crud/index');
 const usersHandler = require('../users/users.handler');
+const orderProductsHandler = require('../ordersProducts/orderProducts.handler');
 
 async function saveOrder(order) {
     const idUser = order.userId;
@@ -38,6 +39,24 @@ async function getByIdOrder(idOrder) {
     return await crud.getById('orders', idOrder);
 };
 
+async function editOrder(idOrder) {
+    const listOrders = await getOrders();
+    const listOrderProducts = orderProductsHandler.getOrderProducts();
+//fazer um for para ver sse há produtos no pedido
+        for(let order of listOrders) {
+            if (order.id === idOrder) {
+        if (order.status == 'open') {
+                console.log('status alterado para fechado');
+            //aqui vai a função de editar
+        } else {
+            console.log('esse pedido já está fechado');
+        }
+    } else {
+        console.log('esse pedido não existe');
+    }
+}
+};
+
 async function removeOrder(idOrder) {
     return await crud.remove('orders', idOrder);
 };
@@ -46,5 +65,6 @@ module.exports = {
     saveOrder,
     getOrders,
     getByIdOrder,
+    editOrder,
     removeOrder
 };

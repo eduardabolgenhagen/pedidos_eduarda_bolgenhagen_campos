@@ -19,6 +19,12 @@ router.get('/:id', async (req, res) => {
     res.json(await orderHandler.getByIdOrder(idOrder));
 });
 
+//edit
+router.put('/:id', async (req, res) => {
+    const idOrder = req.params.id;
+    res.json(await orderHandler.editOrder(idOrder));
+})
+
 //remove
 router.delete('/:id', async (req, res) => {
     const idOrder = res.params.id;
