@@ -17,11 +17,10 @@ async function saveOrder(order) {
                             message: "FUNCIONALIDADE INDISPONÍVEL",
                             necessity: ["userId"]
                         }
-                    } else {
-                        return await crud.save('orders', undefined, order);
                     }
                 }
             }
+            return await crud.save('orders', undefined, order);
         }
     }
     return {
@@ -41,20 +40,36 @@ async function getByIdOrder(idOrder) {
 
 async function editOrder(idOrder) {
     const listOrders = await getOrders();
-    const listOrderProducts = orderProductsHandler.getOrderProducts();
-//fazer um for para ver sse há produtos no pedido
-        for(let order of listOrders) {
-            if (order.id === idOrder) {
-        if (order.status == 'open') {
-                console.log('status alterado para fechado');
-            //aqui vai a função de editar
-        } else {
-            console.log('esse pedido já está fechado');
+    const listOrderProducts = await orderProductsHandler.getOrderProducts();
+
+    for (let order of listOrders) {
+        if (order.id === idOrder) {
+            for (let orderProducts of listOrderProducts) {
+                if (orderProducts.orderId == idOrder) {
+                    if (order.status == 'open') {
+                        const newOrder = {
+                            number: order.number,
+                            userId: order.userId,
+                            status: 'close'
+                        };
+                        return await crud.save('orders', idOrder, newOrder)
+                    } else {
+                        return {
+                            error: "0002",
+                            message: "FUNCIONALIDADE INDISPONÍVEL",
+                            necessity: ["userId"]
+                        }
+                    }
+                } else {
+                    return {
+                        error: "0002",
+                        message: "FUNCIONALIDADE INDISPONÍVEL",
+                        necessity: ["add orderProducts"]
+                    }
+                }
+            }
         }
-    } else {
-        console.log('esse pedido não existe');
     }
-}
 };
 
 async function removeOrder(idOrder) {

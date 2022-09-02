@@ -78,10 +78,6 @@ async function remove(table, id) {
     }
 };
 
-// async function editar(){
-
-// }
-
 module.exports = {
     save,
     get,
