@@ -26,20 +26,20 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 
 async function save(table, id, data) {
-    if (id) {
-        const referenceEntity = await setDoc(doc(db, table), data);
-        const saveData = {
+     if (id) {
+        const referenceEntity = await setDoc(doc(db, table, id), data);
+        const savedData = {
             ...data,
-            id: referenceEntity.id
+            id: id
         }
-        return saveData;
+        return savedData;
     } else {
         const referenceEntity = await addDoc(collection(db, table), data);
-        const saveData = {
+        const savedData = {
             ...data,
             id: referenceEntity.id
         }
-        return saveData;
+        return savedData;
     }
 };
 

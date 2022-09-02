@@ -52,7 +52,7 @@ async function editOrder(idOrder) {
                             userId: order.userId,
                             status: 'close'
                         };
-                        return await crud.save('orders', idOrder, newOrder)
+                        return await crud.save('orders', idOrder, newOrder);
                     } else {
                         return {
                             error: "0002",
@@ -67,6 +67,12 @@ async function editOrder(idOrder) {
                         necessity: ["add orderProducts"]
                     }
                 }
+            }
+        } else {
+            return {
+                error: "0002",
+                message: "ID NÃO EXISTENTE",
+                necessity: ["userId"]
             }
         }
     }
