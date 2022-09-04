@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const orderHandler = require('./orders.handler');
+const orderEditHandler = require('./ordersEdit.handler')
 
 //save
 router.post('/', async (req, res) => {
@@ -22,7 +23,7 @@ router.get('/:id', async (req, res) => {
 //edit
 router.put('/:id', async (req, res) => {
     const idOrder = req.params.id;
-    res.json(await orderHandler.editOrder(idOrder));
+    res.json(await orderEditHandler.editOrder(idOrder));
 })
 
 //remove

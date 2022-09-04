@@ -8,7 +8,6 @@ router.post('/', async (req, res) => {
     res.json(await orderProductsHandler.saveOrderProduct(orderProduct));
 });
 
-//get
 router.get('/', async (req, res) => {
     res.json(await orderProductsHandler.getOrderProducts());
 });
