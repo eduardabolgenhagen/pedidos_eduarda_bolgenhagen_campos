@@ -58,11 +58,13 @@ async function removeOrderByProduct(orderProduct) {
                     ref = true;
                     if (orderProducts.quantity > orderProduct.quantity) {
                         const newOrderProduct = {
-
+                            productId: orderProducts.id,
+                            quantity: orderProducts.quantity - orderProduct.quantity,
+                            orderId: orderProducts.orderId
                         }
-                        //function edit
+                        return await crud.save('orderProducts', orderProduct.id, newOrderProduct)
                     } else {
-                        return await crud.remove('orderProducts', idOrderProduct);
+                        return await crud.remove('orderProducts', orderProduct.id);
                     }
                 }
             }
