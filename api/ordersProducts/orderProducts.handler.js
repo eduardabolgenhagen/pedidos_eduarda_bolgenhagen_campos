@@ -29,12 +29,11 @@ async function saveOrderProduct(orderProduct) {
                 }
             }
         }
-
     }
     return {
         error: "0001",
         message: "ID NÃO EXISTENTE",
-        necessity: ["idOrder, idProduct"]
+        necessity: ["Params incorrects"]
     }
 };
 
@@ -72,11 +71,13 @@ async function removeOrderByProduct(orderProduct) {
     }
 
     if (!ref) {
-        console.log('não pode remover, pedido já fechado');
+        return {
+            error: "0002",
+            message: "FUNCIONALIDADE INDISPONÍVEL",
+            necessity: ["orderProduct"]
+        }
     }
 };
-
-
 
 module.exports = {
     saveOrderProduct,

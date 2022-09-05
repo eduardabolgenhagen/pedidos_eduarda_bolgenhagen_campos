@@ -42,7 +42,7 @@ async function editOrder(idOrder) {
 
     if (!orderFound) {
         return {
-            error: "0002",
+            error: "0001",
             message: "ID NÃO EXISTENTE",
             necessity: ["ordeId"]
 
@@ -52,7 +52,7 @@ async function editOrder(idOrder) {
     if (!orderHasProducts) {
         return {
             error: "0002",
-            message: "O PEDIDO NÃO POSSUI PRODUTOS",
+            message: "FUNCIONALIDADE INDISPONÍVEL",
             necessity: ["ordeId"]
 
         }
