@@ -8,8 +8,10 @@ async function saveOrder(order) {
 
     for (let user of usersList) {
         if (user.id === idUser) {
+            let numberOrder = 0;
             for (let order of orderList) {
                 if (order.userId === idUser) {
+                    numberOrder++;
                     if (order.status == 'open') {
                         return {
                             error: "0002",
@@ -17,9 +19,15 @@ async function saveOrder(order) {
                             necessity: ["userId"]
                         }
                     }
+
                 }
             }
-            return await crud.save('orders', undefined, order);
+            const newOrder = {
+                userId: order.userId,
+                status: 'open',
+                number: numberOrder + 1
+            };
+            return await crud.save('orders', undefined, newOrder);
         }
     }
     return {
