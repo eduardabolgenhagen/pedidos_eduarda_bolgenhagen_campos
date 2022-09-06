@@ -25,6 +25,7 @@ async function saveOrderProduct(orderProduct) {
                             }
                         }
                     }
+                    console.log('vai ser adicionado a nova ordem', orderProduct)
                     return await crud.save('orderProducts', undefined, orderProduct);
                 }
             }

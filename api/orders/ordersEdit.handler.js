@@ -27,13 +27,17 @@ async function editOrder(idOrder) {
                             necessity: ["userId"]
                         }
                     }
-                } else {
-                    return {
-                        error: "0002",
-                        message: "FUNCIONALIDADE INDISPONÍVEL",
-                        necessity: ["add orderProducts"]
-                    }
-                }
+                } 
+
+                //verificar funcionalidade do else e do erro
+                // else {
+                //     return {
+                //         error: "0002",
+                //         message: "FUNCIONALIDADE INDISPONÍVEL",
+                //         necessity: ["add orderProducts"]
+                //     }
+                // }
+
             }
             orderFound = true;
             break;
