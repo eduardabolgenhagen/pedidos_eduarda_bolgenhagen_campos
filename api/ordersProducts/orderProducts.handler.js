@@ -24,8 +24,13 @@ async function saveOrderProduct(orderProduct) {
                                 return await crud.save('orderProducts', orderExist.id, newOrderProduct);
                             }
                         }
+                    } else {
+                        return {
+                            error: "0002",
+                            message: "FUNCIONALIDADE INEXISTENTE",
+                            necessity: ["idOrder"]
+                        }
                     }
-                    console.log('vai ser adicionado a nova ordem', orderProduct)
                     return await crud.save('orderProducts', undefined, orderProduct);
                 }
             }
